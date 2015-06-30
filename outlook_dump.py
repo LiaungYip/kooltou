@@ -20,8 +20,20 @@ if selected_folder is None:
 else:
     print selected_folder.Name
 
-def get_subfolders( folder ):
-    # Returns a list of folders under the given folder.
+def get_subfolders( folder, f_list ):
+    # `folder` is an Outlook `Folder` object, and `f_list` is an empty python list().
+    # At finish, f_list contains a flat list of Outlook `Folder` objects,
+    # including all sub-folders of `folder` as well as `folder` itself.
+    f_list.append (folder)
     for f in folder.Folders:
-        print f.Name
-        get_subfolders(f)
+        get_subfolders(f, f_list)
+
+def print_subjects (folder):
+    for i in folder.Items:
+        print i.subject
+
+folder_list = list()
+get_subfolders(selected_folder, folder_list)
+
+for n in xrange(3):
+    print_subjects(folder_list[n])
