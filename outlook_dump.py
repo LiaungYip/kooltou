@@ -47,17 +47,6 @@ def user_select_outlook_folder(ol_namespace):
     logging.info("User selected the folder %s" % selected_folder.FolderPath)
     return selected_folder
 
-def user_select_filesystem_dir():
-    logging.info("Asking user to select filesystem directory...")
-    while True:
-        dir = easygui.diropenbox("Pick a folder to save the email .msg files to.","Choose backup destination")
-        if dir is not None:
-            break
-        if easygui.buttonbox("Failed to pick a directory to save the emails. Try again, or quit?","Error",("Try again","Quit")) == "Quit":
-            exit()
-    logging.info("User selected the directory %s" % dir)
-    return dir
-
 def make_directories(directory_path):
     if os.path.isdir (directory_path):
         logging.info("Folder %s already exists." % directory_path)
