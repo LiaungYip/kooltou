@@ -58,11 +58,6 @@ def user_select_filesystem_dir():
     logging.info("User selected the directory %s" % dir)
     return dir
 
-def get_local_timezone():
-    TZ = "Australia/Perth" #TODO: this function is obsolete
-    return pytz.timezone(TZ)
-    logging.info("Using timezone %s" % TZ)
-
 def make_directories(directory_path):
     if os.path.isdir (directory_path):
         logging.info("Folder %s already exists." % directory_path)
@@ -231,16 +226,20 @@ logging.info("Starting up....")
 try:
     settings = Settings(SETTINGS_FILE_NAME)
 
+    if settings.debug_mode.lower() == "Debug Mode".lower():
+        l3.setLevel(logging.DEBUG)
+        logging.debug("Setting logger `l3` to level DEBUG")
+
     logging.info("Opening Outlook Application...")
     ol_application = win32com.client.Dispatch("Outlook.Application")
     ol_namespace = ol_application.GetNamespace("MAPI") # Equivalent to ol_application.Session
 
     selected_ol_folder = user_select_outlook_folder(ol_namespace)
-    save_to_folder = settings.dest_dir # TODO: Remove this tautology
+    save_to_folder = settings.dest_dir #TODO: Remove this tautology
 
     ol_folder_list = get_subfolders(selected_ol_folder)
 
-    local_timezone = get_local_timezone()
+    local_timezone = pytz.timezone(settings.timezone_name)
     now = datetime.datetime.now(pytz.utc)
 
     CATEGORY_NAME = "Saved as MSG"
@@ -279,13 +278,13 @@ try:
 
             utc_time = get_mailitem_utc_time(mi, local_timezone)
             delta = now - utc_time
-            if delta.days < 60: #TODO: Fix hardcoding
+            if delta.days < settings.days_old:
                 logging.debug("Item `%s` of date `%s` is less than %i days old. Skipping." %
-                              (raw_subject, utc_time, 60)) # TODO: Fix hardcoding
+                              (raw_subject, utc_time, settings.days_old))
                 continue
             else:
                 logging.debug("Item `%s` of date `%s` is %i days old, archiving..." %
-                              (raw_subject, utc_time, delta.days)) # TODO: Fix hardcoding
+                              (raw_subject, utc_time, delta.days))
 
             utc_time_string = get_mailitem_utc_time_string (utc_time)
 
