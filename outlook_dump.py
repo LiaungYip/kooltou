@@ -201,7 +201,6 @@ Use these settings, or select new settings?
 # Main script
 # ---------------------------------------------------------------------------- #
 
-#TODO: Set up GUI configuration interface.
 #TODO: Pywin32 packaging.
 
 # set up logging
@@ -215,7 +214,7 @@ l2 = logging.FileHandler('log-%s-summary.txt' % time.strftime("%Y-%m-%dT%H%M%S")
 l2.setLevel(logging.INFO)
 # log to console - if in debug mode, log everything. Otherwise, only INFO and above.
 l3 = logging.StreamHandler()
-l3.setLevel(logging.INFO) # TODO: Switch between INFO and DEBUG
+l3.setLevel(logging.INFO)
 fm = logging.Formatter('%(levelname)s: %(message)s')
 for handler in [l1,l2,l3]:
     handler.setFormatter(fm)
@@ -235,7 +234,7 @@ try:
     ol_namespace = ol_application.GetNamespace("MAPI") # Equivalent to ol_application.Session
 
     selected_ol_folder = user_select_outlook_folder(ol_namespace)
-    save_to_folder = settings.dest_dir #TODO: Remove this tautology
+    save_to_folder = settings.dest_dir
 
     ol_folder_list = get_subfolders(selected_ol_folder)
 
