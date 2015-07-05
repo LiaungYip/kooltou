@@ -182,10 +182,6 @@ Use these settings, or select new settings?
         logging.info("User input: %s" % d)
         return (d == "Use these settings")
 
-
-
-
-
 # ---------------------------------------------------------------------------- #
 # Main script
 # ---------------------------------------------------------------------------- #
