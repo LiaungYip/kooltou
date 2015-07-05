@@ -8,9 +8,10 @@ It has been tested with Outlook 2010.
 
 ## Users
 
-* [Download: `./dist/kooltou.exe`](./dist/kooltou.exe) - last updated 2015-07-06
+* [Download: `./dist/kooltou.exe`](https://github.com/LiaungYip/kooltou/blob/master/dist/kooltou.exe?raw=true) - last updated 2015-07-06
 	* The program itself. Download and run this.
 	* Does not require installation, therefore does not require elevated rights ("administrator rights").
+	* MD5 checksum: `829278429742826A0699F1DA1EFA9972  kooltou.exe`
 * [Documentation: `./doc/README.md`](./doc/README.md)
 	* Describes features, instructions for using the software, and troubleshooting tips.
 
