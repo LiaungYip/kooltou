@@ -19,6 +19,10 @@ import time
 # Function definitions
 # ---------------------------------------------------------------------------- #
 
+def halt_catch_fire():
+    raw_input("Fatal error. Can't continue.\nConsult the log files for details of error(s).\nPress enter to exit...")
+    exit()
+
 def get_subfolders( folder, f_list = list() ):
     # Return a flat list of Outlook `Folder` objects,
     # including all sub-folders of `folder` as well as `folder` itself.
@@ -44,7 +48,7 @@ def user_select_outlook_folder(ol_namespace):
         selected_folder = ol_namespace.PickFolder() # Brings up a GUI selection dialogue
         if selected_folder is not None:
             break
-        if easygui.buttonbox("Failed to pick an Outook folder to back up. Try again, or quit?","Error",("Try again","Quit")) == "Quit":
+        if easygui.buttonbox("Failed to pick an Outlook folder to back up. Try again, or quit?","Error",("Try again","Quit")) == "Quit":
             exit()
     logging.info("User selected the folder %s" % selected_folder.FolderPath)
     return selected_folder
@@ -54,8 +58,18 @@ def make_directories(directory_path):
         logging.info("Folder %s already exists." % directory_path)
     else:
         logging.info("Folder %s does not exist. Attempting to create it." % directory_path)
-        os.makedirs(directory_path)
-        assert os.path.isdir (directory_path)
+        try:
+            os.makedirs(directory_path)
+        except WindowsError:
+            logging.exception("Do you have permission to write to this location?")
+            halt_catch_fire()
+
+        try:
+            assert os.path.isdir (directory_path)
+        except AssertionError:
+            logging.exception("Failed to create directory.")
+            halt_catch_fire()
+
         logging.info("Created folder %s." % directory_path)
 
 def get_mailitem_utc_time ( mailitem, local_timezone ):
