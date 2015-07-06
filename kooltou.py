@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+__version__ = "v0.0.2 - 2015-07-06T13:04:19.370000"
+
 
 # Third-party libs from PyPI
 import unicodedata      # for slugifying
@@ -215,7 +217,8 @@ for handler in [l1,l2,l3]:
     handler.setFormatter(fm)
     root_logger.addHandler(handler)
 logging.info("Starting up....")
-
+logging.info("kooltou version %s" % __version__)
+logging.info("https://github.com/LiaungYip/kooltou")
 
 try:
     settings = Settings(SETTINGS_FILE_NAME)
