@@ -111,6 +111,7 @@ class Settings(easygui.EgStore):
         self.debug_mode = ""
         self.days_old = -1
         self.dest_dir = ""
+        self.mark_as_saved = True
 
         if os.path.isfile(self.filename):
             logging.info("Config file %s found. Attempting to load..."
@@ -140,6 +141,7 @@ class Settings(easygui.EgStore):
             assert self.days_old >= 0
             assert self.dest_dir != ""
             assert os.path.isdir(self.dest_dir)
+            assert type (self.mark_as_saved) is bool
             return True
         except AttributeError, AssertionError:
             logging.exception("Invalid setting.")
@@ -164,19 +166,27 @@ class Settings(easygui.EgStore):
                                            "Choose backup destination",
                                            "%HOMEPATH%")
 
+        b = easygui.ynbox("Apply 'Saved as MSG' tag to emails that are saved?",
+                          title="Mark emails as saved?",
+                          choices=("Yes (recommended)","No (experts only)"))
+        self.mark_as_saved = bool(b)
+
     def user_confirm_settings(self):
         s1 = """Your settings are:
 Time zone: `%s`
 Debug mode: `%s`
 Save emails older than `%i` days
 Destination directory: `%s`
+Mark emails as saved: `%s`
 
 Use these settings, or select new settings?
 """
         s1 = s1 % ( self.timezone_name,
                     self.debug_mode,
                     self.days_old,
-                    self.dest_dir)
+                    self.dest_dir,
+                    self.mark_as_saved,
+        )
         logging.info(s1)
         d = easygui.buttonbox(s1,"Use these settings?",("Use these settings","New settings"))
         logging.info("User input: %s" % d)
@@ -283,7 +293,8 @@ try:
             logging.debug("Trying to save %s" % file_path)
             try:
                 mi.SaveAs ( file_path, 9 ) # Magic number 9 = olUnicodeMsg.
-                # set_ol_category(mi, CATEGORY_NAME)
+                if settings.mark_as_saved:
+                    set_ol_category(mi, CATEGORY_NAME)
                 num_saved += 1
             except pywintypes.com_error:
                 logging.exception("Failure in MailItem.SaveAs().")
