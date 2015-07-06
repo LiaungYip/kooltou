@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__version__ = "v0.0.3 - 2015-07-06T14:31:47.419000"
+__version__ = "v0.0.4 - 2015-07-06T14:52:37.177000"
 
 
 # Third-party libs from PyPI

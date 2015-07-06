@@ -11,6 +11,9 @@ It has been tested with Outlook 2010.
 * [Download: `./dist/kooltou.exe`](https://github.com/LiaungYip/kooltou/blob/master/dist/kooltou.exe?raw=true) - last updated 2015-07-06
 	* The program itself. Download and run this.
 	* Does not require installation, therefore does not require elevated rights ("administrator rights").
+	* v0.0.4 - 2015-07-06T14:52:37.177000
+		* Add some error handling for the case where folder creation fails (i.e. due to not having admin rights.)
+		* MD5: `74E22DC415D23EC62150940FF90E6DFF  ./dist/kooltou.exe`
 	* v0.0.3 - 2015-07-06T14:31:47.419000
 		* Fix bug where saving to a folder like `F:\Backups\Email` instead tries to save to `F:\`.
 		* MD5: `C59C6E4AB72F86CCA6FA86A167BFB3C8  kooltou.exe`
