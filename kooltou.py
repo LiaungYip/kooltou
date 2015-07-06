@@ -143,7 +143,7 @@ class Settings(easygui.EgStore):
             assert os.path.isdir(self.dest_dir)
             assert type (self.mark_as_saved) is bool
             return True
-        except AttributeError, AssertionError:
+        except (AttributeError, AssertionError):
             logging.exception("Invalid setting.")
             return False
 
