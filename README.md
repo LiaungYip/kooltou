@@ -11,7 +11,12 @@ It has been tested with Outlook 2010.
 * [Download: `./dist/kooltou.exe`](https://github.com/LiaungYip/kooltou/blob/master/dist/kooltou.exe?raw=true) - last updated 2015-07-06
 	* The program itself. Download and run this.
 	* Does not require installation, therefore does not require elevated rights ("administrator rights").
-	* MD5 checksum: `829278429742826A0699F1DA1EFA9972  kooltou.exe`
+	* v0.0.2 - 2015-07-06T13:04:19.370000
+		* Fix bug where 'Saved as MSG' tag was not being applied to emails.
+		* Add option for whether to apply `Saved as MSG` tag or not.
+		* MD5: `57C640AD3F1893AE8B7BDDE9B69A5E73  kooltou.exe`
+	* v0.0.1:
+		* MD5: `829278429742826A0699F1DA1EFA9972  kooltou.exe`
 * [Documentation: `./doc/README.md`](./doc/README.md)
 	* Describes features, instructions for using the software, and troubleshooting tips.
 
