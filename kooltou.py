@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__version__ = "v0.0.2 - 2015-07-06T13:04:19.370000"
+__version__ = "v0.0.3 - 2015-07-06T14:31:47.419000"
 
 
 # Third-party libs from PyPI
@@ -249,7 +249,7 @@ try:
     for folder in ol_folder_list:
         ol_folder_path_str = folder.FolderPath # Example: \\Outlook Data File\J9 Administrivia\Expenses
         logging.info("Entering folder %s" % ol_folder_path_str)
-        ol_folder_path_parts = ol_folder_path_str.split("\\")[1:] # [1:] to skip empty part due to "\\" at start
+        ol_folder_path_parts = ol_folder_path_str.split("\\")[2:] # [2:] to skip empty parts due to "\\" at start
         ol_folder_path = os.sep.join( [slugify(p) for p in ol_folder_path_parts] ) # clean naughty characters
 
         dest_folder_path = os.path.join (save_to_folder, ol_folder_path)
