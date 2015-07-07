@@ -8,9 +8,27 @@ It has been tested with Outlook 2010.
 
 ## Users
 
-* [Download: `./dist/kooltou.exe`](https://github.com/LiaungYip/kooltou/blob/master/dist/kooltou.exe?raw=true) - last updated 2015-07-06
+* [Download: `./dist/kooltou.exe`](https://github.com/LiaungYip/kooltou/blob/master/dist/kooltou.exe?raw=true)
+	* *Link temporarily broken...*
+	* Latest version: v0.0.5.
 	* The program itself. Download and run this.
 	* Does not require installation, therefore does not require elevated rights ("administrator rights").
+
+* **[Documentation: `./doc/README.md`](./doc/README.md)**
+	* Describes features, instructions for using the software, and troubleshooting tips.
+
+## Developers
+
+* Package requirements:
+	* `easygui`
+	* `pytz`
+	* `pywin32` (`pip` package `pypiwin32`)
+	* `unicodedata`
+* Build procedure: `pyinstaller --onefile ./kooltou.py`.
+
+## Version History
+	* v0.0.5 - 2015-07-07T04:49:02.813000
+		* Fix rare crash bug when MailItem doesn't have a `ReceivedTime`.
 	* v0.0.4 - 2015-07-06T14:52:37.177000
 		* Add some error handling for the case where folder creation fails (i.e. due to not having admin rights.)
 		* MD5: `74E22DC415D23EC62150940FF90E6DFF  ./dist/kooltou.exe`
@@ -23,17 +41,6 @@ It has been tested with Outlook 2010.
 		* MD5: `57C640AD3F1893AE8B7BDDE9B69A5E73  kooltou.exe`
 	* v0.0.1:
 		* MD5: `829278429742826A0699F1DA1EFA9972  kooltou.exe`
-* [Documentation: `./doc/README.md`](./doc/README.md)
-	* Describes features, instructions for using the software, and troubleshooting tips.
-
-## Developers
-
-* Package requirements:
-	* `easygui`
-	* `pytz`
-	* `pywin32` (`pip` package `pypiwin32`)
-	* `unicodedata`
-* Build procedure: `pyinstaller --onefile ./kooltou.py`.
 
 ## License
 
