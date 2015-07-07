@@ -20,7 +20,7 @@ import time
 # ---------------------------------------------------------------------------- #
 
 def halt_catch_fire():
-    raw_input("Fatal error. Can't continue.\nConsult the log files for details of error(s).\nPress enter to exit...")
+    raw_input("Fatal error. Can't continue.\nConsult 'log-...-summary.txt' for details of error(s).\nPress enter to exit...")
     exit()
 
 def get_subfolders( folder, f_list = list() ):
@@ -333,3 +333,4 @@ try:
 
 except Exception:
     logging.exception("Fatal error in main program.")
+    halt_catch_fire()
