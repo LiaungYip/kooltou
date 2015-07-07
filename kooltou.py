@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__version__ = "v0.0.4 - 2015-07-06T14:52:37.177000"
+__version__ = "v0.0.5 - 2015-07-07T04:49:02.813000"
 
 
 # Third-party libs from PyPI
@@ -83,6 +83,7 @@ def get_mailitem_utc_time ( mailitem, local_timezone ):
         # emails, i.e. from CDEGS license manager
         # Try using CreationTime instead
         timestamp = int(mailitem.CreationTime)
+        subject = mailitem.Subject
         logging.warning("MailItem didn't have a ReceivedTime. Using CreationTime instead. (Mail item: %s, CreationTime: %s)" % (subject, timestamp))
     tz_aware_time = datetime.datetime.fromtimestamp(timestamp,local_timezone)
     utc_time = tz_aware_time.astimezone(pytz.utc)
@@ -234,6 +235,7 @@ logging.info("Starting up....")
 logging.info("kooltou version %s" % __version__)
 logging.info("https://github.com/LiaungYip/kooltou")
 
+# noinspection PyBroadException
 try:
     settings = Settings(SETTINGS_FILE_NAME)
 
