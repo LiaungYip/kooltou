@@ -153,7 +153,7 @@ class Settings(easygui.EgStore):
         try:
             assert type (self.timezone_name) is str
             assert self.timezone_name != ""
-            assert self.debug_mode in ("Normal mode", "Debug mode")
+            assert type(self.debug_mode) is bool
             assert type (self.days_old) is int
             assert self.days_old >= 0
             assert self.dest_dir != ""
@@ -171,9 +171,8 @@ class Settings(easygui.EgStore):
                                                pytz.common_timezones)
 
         s2 = "Enable debug mode? (Displays very detailed program execution information on screen.)"
-        self.debug_mode = easygui.buttonbox(s2,
-                                            "Debug mode?",
-                                            ("Normal mode","Debug mode"))
+        a = easygui.buttonbox(s2,"Debug mode?",("Normal mode (recommended)","Debug mode (experts only)"))
+        self.debug_mode = True if a.lower().startswith("debug") else False
 
         s3 = "Save emails older than X days: (default 60 days; 0 for all emails regardless of age.)"
         self.days_old = easygui.integerbox(s3,"Email age?",default=60,
@@ -239,7 +238,7 @@ logging.info("https://github.com/LiaungYip/kooltou")
 try:
     settings = Settings(SETTINGS_FILE_NAME)
 
-    if settings.debug_mode.lower() == "Debug Mode".lower():
+    if settings.debug_mode:
         l3.setLevel(logging.DEBUG)
         logging.debug("Setting logger `l3` to level DEBUG")
 
