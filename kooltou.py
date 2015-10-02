@@ -270,6 +270,9 @@ try:
         dest_folder_path = os.path.join (save_to_folder, ol_folder_path)
         make_directories(dest_folder_path)
 
+        # 255 characters max path length on windows. Less one character for trailing "\".
+        max_filename_length = 255 - len(dest_folder_path) - 1
+
         for mi in folder.Items: #mi = MailItem
             num_processed += 1
             raw_subject = mi.Subject
@@ -300,7 +303,12 @@ try:
 
             utc_time_string = get_mailitem_utc_time_string (utc_time)
 
-            subject = slugify(raw_subject[:100])
+            # Calculate maximum permitted number of characters for subject, to stay within 255 chars for entire path.
+            # Capped at 100 characters.
+            max_subject_length = max_filename_length - len(utc_time_string) - len (" ")  - len(".MSG")
+            subject_length = min(100, max_subject_length)
+
+            subject = slugify(raw_subject[:subject_length])
             if raw_subject != subject:
                 logging.debug("Raw name `%s` was cleaned to `%s`" %
                               (raw_subject, subject))
@@ -310,11 +318,13 @@ try:
 
             logging.debug("Trying to save %s" % file_path)
             try:
+                if len(file_path) > 255:
+                    raise ValueError("File path exceeds 255 chars: %s" % file_path)
                 mi.SaveAs ( file_path, 9 ) # Magic number 9 = olUnicodeMsg.
                 if settings.mark_as_saved:
                     set_ol_category(mi, CATEGORY_NAME)
                 num_saved += 1
-            except pywintypes.com_error:
+            except pywintypes.com_error, ValueError:
                 logging.exception("Failure in MailItem.SaveAs().")
                 logging.error("Details... MessageClass: `%s`, FolderPath: `%s`, Subject `%s`, ReceivedTime `%s`, CreationTime `%s`" %
                               (mi.MessageClass, ol_folder_path_str, raw_subject, mi.ReceivedTime, mi.CreationTime))
