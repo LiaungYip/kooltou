@@ -8,8 +8,8 @@ It has been tested with Outlook 2010.
 
 ## Users
 
-* **[Download](https://github.com/LiaungYip/kooltou/releases/download/v0.0.5/kooltou_0.0.5.exe)**
-	* Latest version: v0.0.5.
+* **[Download](https://github.com/LiaungYip/kooltou/releases/download/v0.0.6/kooltou_0.0.6.exe)**
+	* Latest version: v0.0.6.
 	* The program itself. Download and run this.
 	* Does not require installation, therefore does not require elevated rights ("administrator rights").
 
