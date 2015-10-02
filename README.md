@@ -26,7 +26,8 @@ It has been tested with Outlook 2010.
 * Build procedure: `pyinstaller --onefile ./kooltou.py`.
 
 ## Version History
-
+* v0.0.6 - 2015-10-02
+    * Fix bug with long filenames and long folder paths, exceeding Windows' 255 character path limit.
 * v0.0.5 - 2015-07-07T04:49:02.813000
 	* Fix rare crash bug when MailItem doesn't have a `ReceivedTime`.
 * v0.0.4 - 2015-07-06T14:52:37.177000
