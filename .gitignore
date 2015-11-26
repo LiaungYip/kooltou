@@ -1,7 +1,4 @@
 easygui_settings.dat
 .idea/*
+outlook_dump.spec
 build
-dist
-*.spec
-log-*-detailed.txt
-log-*-summary.txt
